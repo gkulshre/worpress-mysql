@@ -1,0 +1,30 @@
+version: '3'
+services:
+        db:
+                image: mysql
+                environment:
+                        MYSQL_DATABASE: my_db
+                        MYSQL_USER: db_user
+                        MYSQL_PASSWORD: un!V!ct19
+                        MYSQL_RANDOM_ROOT_PASSWORD: '1'
+
+                volumes:
+                        -  db:/var/lib/mysql
+        wordpress:
+                image: wordpress
+                ports:
+                        - 80:80
+                environment:
+                           WORDPRESS_DB_HOST: db
+                           WORDPRESS_DB_USER: db_user
+                           WORDPRESS_DB_PASSWORD: un!V!ct19
+                           WORDPRESS_DB_NAME: my_db
+                volumes:
+                        -  wordpress:/var/www/html
+                depends_on:
+                        - db
+
+
+volumes:
+        wordpress:
+        db:
